@@ -1,0 +1,2 @@
+
+{"date":"Wed,22Oct201402:29:26GMT","name":"NYUv2images/NYU0386","frames": [{}],"objects":[{"name":"sofa","polygon":[{"Ymin":1.211931896,"Ymax":0.3701286316,"rectangle":true,"X":[-1.170239088,0.8150948018,1.263721637,-0.7216122532],"Z":[1.922308146,0.9036567623,1.778022688,2.796674072]}]}],"imageNum":264,"extrinsics":"20131231164306.txt","conflictList": [null],"fileList":["NYU0386.jpg"]}

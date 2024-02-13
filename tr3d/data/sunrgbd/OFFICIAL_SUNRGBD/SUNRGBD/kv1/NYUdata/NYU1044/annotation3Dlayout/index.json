@@ -1,0 +1,2 @@
+
+{"date":"Mon,08Dec201411:16:47GMT","name":"NYUv2images/NYU1044","frames":[{}],"objects":[{"name":"room","polygon":[{"Ymin":1.303332731,"Ymax":-4.136668151,"rectangle":false,"X":[-5.533398672,1.019288627,0.6330990417,0.0457651536,-5.646477741],"Z":[3.879655909,2.805477229,0.192980897,-0.0283770955,3.391906884]}]}],"extrinsics":"20131231164533.txt","conflictList": [null],"fileList":["NYU1044.jpg"]}

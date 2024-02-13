@@ -1,0 +1,2 @@
+
+{"date":"Sun,07Dec201415:44:57GMT","name":"NYUv2images/NYU0717","frames":[{}],"objects":[{"name":"room","polygon":[{"Ymin":4.138769112,"Ymax":-1.490000371,"rectangle":false,"X":[-4.282742109,-4.282742111,1.157261104,1.230000307,0.00999957662],"Z":[1.480000731,1.460000724,1.480000137,0.0799996884,-0.06000044235]}]}],"extrinsics":"20131231164418.txt","conflictList": [null],"fileList":["NYU0717.jpg"]}

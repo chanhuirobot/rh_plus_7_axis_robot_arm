@@ -18,9 +18,9 @@ find_package(rclcpp REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(std_msgs REQUIRED)
-ind_package(sensor_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
-include_directories(icnlude)
+include_directories(include)
 
 add_executable(servo_control_node
   src/servo/servo_command.cpp

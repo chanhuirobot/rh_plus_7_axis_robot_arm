@@ -1,2 +1,0 @@
-
-{"date":"Fri,20Feb201504:16:21GMT","name":"NYUv2images/NYU0536//","frames": [{}],"objects":[{"name":"chair","polygon":[{"Ymin":1.321716863,"Ymax":0.3,"rectangle":true,"X":[-0.795452005,-0.2045448013,-0.4136350426,-1.004542246],"Z":[0.8818153656,1.036360327,1.818176011,1.66363105]}]}],"extrinsics":"20131231164338.txt","conflictList": [null],"fileList":["NYU0536.jpg"]}

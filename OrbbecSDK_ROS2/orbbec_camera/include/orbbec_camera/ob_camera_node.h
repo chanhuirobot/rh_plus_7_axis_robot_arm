@@ -396,6 +396,8 @@ class OBCameraNode {
   bool enable_d2c_viewer_ = false;
   std::unique_ptr<D2CViewer> d2c_viewer_ = nullptr;
   std::map<stream_index_pair, std::atomic_bool> save_images_;
+  std::map<stream_index_pair, int> save_images_count_;
+  int max_save_images_count_ = 10;
   std::atomic_bool save_point_cloud_{false};
   std::atomic_bool save_colored_point_cloud_{false};
   rclcpp::Service<std_srvs::srv::Empty>::SharedPtr save_images_srv_;
@@ -446,5 +448,6 @@ class OBCameraNode {
   std::condition_variable colorFrameCV_;
 
   bool ordered_pc_ = false;
+  bool use_hardware_time_ = false;
 };
 }  // namespace orbbec_camera

@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<robot name="rh_plus_7_axis_robot_arm" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<material name="red">
+  <color rgba="0.914 0.376 0.404 1.000"/>
+</material>
+
+<material name="orange">
+  <color rgba="0.918 0.475 0.345 1.000"/>
+</material>
+
+<material name="yellow">
+  <color rgba="0.894 0.753 0.416 1.000"/>
+</material>
+
+<material name="green">
+  <color rgba="0.722 0.886 0.392 1.000"/>
+</material>
+
+<material name="blue">
+  <color rgba="0.361 0.522 0.827 1.000"/>
+</material>
+
+<material name="purple">
+  <color rgba="0.690 0.506 0.816 1.000"/>
+</material>
+
+<material name="white">
+  <color rgba="0.900 0.900 0.900 1.000"/>
+</material>
+
+</robot>

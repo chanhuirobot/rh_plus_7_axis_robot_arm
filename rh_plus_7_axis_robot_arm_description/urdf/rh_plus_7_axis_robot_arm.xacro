@@ -221,7 +221,7 @@
 </joint>
 
 <joint name="Revolute 5" type="revolute">
-  <origin xyz="0.0299 -0.02519 9.1e-05" rpy="0 0 0"/>
+  <origin xyz="0.0299 -0.02519 0.0" rpy="0 0 0"/>
   <parent link="link4"/>
   <child link="link5"/>
   <axis xyz="0.0 -1.0 0.0"/>
@@ -229,7 +229,7 @@
 </joint>
 
 <joint name="Revolute 6" type="revolute">
-  <origin xyz="0.0611 0.02542 -9.2e-05" rpy="0 0 0"/>
+  <origin xyz="0.0611 0.02542 0.0" rpy="0 0 0"/>
   <parent link="link5"/>
   <child link="gripper_base"/>
   <axis xyz="1.0 0.0 0.0"/>
@@ -241,7 +241,7 @@
   <parent link="gripper_base"/>
   <child link="gripper_hand_left"/>
   <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="0.030" lower="0.0" effort="100" velocity="0.015"/>
+  <limit upper="0.030" lower="0.0" effort="100" velocity="0.15"/>
 </joint>
 
 <joint name="Slider 2" type="prismatic">
@@ -249,7 +249,7 @@
   <parent link="gripper_base"/>
   <child link="gripper_hand_right"/>
   <axis xyz="0.0 1.0 0.0"/>
-  <limit upper="0.030" lower="0.0" effort="100" velocity="0.015"/>
+  <limit upper="0.030" lower="0.0" effort="100" velocity="0.15"/>
   <mimic joint="Slider 1" multiplier="1"/>
 </joint>
 

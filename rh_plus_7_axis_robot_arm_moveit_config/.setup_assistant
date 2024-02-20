@@ -1,0 +1,19 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: rh_plus_7_axis_robot_arm_description
+    relative_path: urdf/rh_plus_7_axis_robot_arm.xacro
+  srdf:
+    relative_path: config/rh_plus_7_axis_robot_arm.srdf
+  package_settings:
+    author_name: chanhuirobot
+    author_email: chanhui.robot@gmail.com
+    generated_timestamp: 1708416323
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro

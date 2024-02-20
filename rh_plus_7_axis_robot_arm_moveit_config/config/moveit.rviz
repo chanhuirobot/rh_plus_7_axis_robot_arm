@@ -1,0 +1,64 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /MotionPlanning1/Planning Request1
+        - /MotionPlanning1
+Visualization Manager:
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Value: true
+    - Class: moveit_rviz_plugin/MotionPlanning
+      Name: MotionPlanning
+      Planning Scene Topic: monitored_planning_scene
+      Robot Description: robot_description
+      Scene Geometry:
+        Scene Alpha: 1
+      Scene Robot:
+        Robot Alpha: 1
+      Planning Request:
+        Interactive Marker Size: 0.13
+        Goal State Alpha: 0.3
+      Planned Path:
+        Loop Animation: false
+        State Display Time: 0.5 s
+        Trajectory Topic: display_planned_path
+        Color Enabled: true
+      Value: true
+  Global Options:
+    Fixed Frame: base_link
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 0.78255
+      Focal Point:
+        X: 0.0325
+        Y: 0.1196
+        Z: 0.0244
+      Name: Current View
+      Pitch: 0.53
+      Target Frame: base_link
+      Yaw: 5.48
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1011
+  Hide Left Dock: false
+  Hide Right Dock: false
+  MotionPlanning:
+    collapsed: false
+  MotionPlanning - Trajectory Slider:
+    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000002b400000397fc0200000005fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000004200fffffffb000000100044006900730070006c006100790073010000003e00000208000000ca00fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000024c000001890000018900fffffffb0000000800480065006c0070000000029a0000006e0000000000000000fb0000000a0056006900650077007301000002fd000000b50000000000000000000004c60000039700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1920
+  X: 0
+  Y: 32
+
+

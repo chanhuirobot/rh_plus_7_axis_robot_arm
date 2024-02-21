@@ -36,7 +36,7 @@ void ServoControlNode::ik_angle_callback(const sensor_msgs::msg::JointState & ms
 {
   for (int i=0; i < SERVO_NUM; i++){
     if (i == (SERVO_NUM-1))
-      angles[i] = length2angle(msg.position[i]) * 180 / M_PI;
+      angles[i] = round(500 + length2angle(msg.position[i]) * 180 / M_PI * 1000 / 240);
     else
       angles[i] = round(500 + msg.position[i] * 180 / M_PI * 1000 / 240);
     write_angle(i+1,angles[i]);

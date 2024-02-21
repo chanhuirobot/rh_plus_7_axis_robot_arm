@@ -1,4 +1,3 @@
-// client
 #include "rclcpp/rclcpp.hpp"
 #include "rh_plus_interface/srv/servoinfos.hpp"
 
@@ -9,7 +8,7 @@ class ServoInfoClient : public rclcpp::Node
     public:
         ServoInfoClient() : Node("servo_info_client")
         {
-            client_ = create_client<rh_plus_interface::srv::Servoinfo>("servo_infos");
+            client_ = create_client<rh_plus_interface::srv::Servoinfos>("/servo_infos");
 
             while (rclcpp::ok())
             {
@@ -20,29 +19,30 @@ class ServoInfoClient : public rclcpp::Node
                 if (input == 0 || (input != 1 && input != 2))
                     break;
 
-                auto request = std::make_shared<rh_plus_interface::srv::Servoinfo::Request>();
+                auto request = std::make_shared<rh_plus_interface::srv::Servoinfos::Request>();
                 request->input = input;
 
                 auto result = client_->async_send_request(request);
 
-                if (rclcpp::spin_until_future_complete(node, result) == rclcpp::FutureReturnCode::SUCCESS)
-                {
-                    auto response = result->get();
+                try {
+                    auto response = result.get();
                     RCLCPP_INFO(get_logger(), "Received response: ");
                     if (input == 1)
                         for (size_t i = 0; i < response->servo_temps.size(); ++i)
-                            RCLCPP_INFO(get_logger(), "Servo Temp[%zu]: %u\\n", i, response->servo_temps[i]);
+                            RCLCPP_INFO(this->get_logger(), "Servo Temp[%zu]: %u\\n", i, response->servo_temps[i]);
                     else if (input == 2)
                         for (size_t i = 0; i < response->servo_angles.size(); ++i)
-                            RCLCPP_INFO(get_logger(), "Servo Angle[%zu]: %d\\n", i, response->servo_angles[i]);
+                            RCLCPP_INFO(this->get_logger(), "Servo Angle[%zu]: %d\\n", i, response->servo_angles[i]);
                 }
-                else
-                    RCLCPP_ERROR(get_logger(), "Failed to receive response.\\n");
+                catch(const std::exception &e)
+                {
+                    RCLCPP_ERROR(this->get_logger(), "Service Call failed");
+                }
             }
         }
     private:
-        rclcpp::Client<rh_plus_interface::srv::Servoinfo>::SharedPtr client_;
-}
+        rclcpp::Client<rh_plus_interface::srv::Servoinfos>::SharedPtr client_;
+};
 
 int main(int argc, char *argv[])
 {

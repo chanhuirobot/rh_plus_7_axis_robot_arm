@@ -1,7 +1,8 @@
 // server
 #include "rclcpp/rclcpp.hpp"
-#include "rh_plus_interface/srv/Servoinfos.hpp"
+#include "rh_plus_interface/srv/servoinfos.hpp"
 #include "servo/servo_command.hpp"
+#include "global_variable.hpp"
 
 class ServoInfoServer : public rclcpp::Node
 {
@@ -9,14 +10,14 @@ public:
   ServoInfoServer() : Node("servo_info_server")
   {
     // 서비스 서버 생성
-    server_ = create_service<rh_plus_interface::srv::Servoinfo>(
-      "servo_infos",
+    server_ = create_service<rh_plus_interface::srv::Servoinfos>(
+      "/servo_infos",
       std::bind(&ServoInfoServer::handle_service_request, this, std::placeholders::_1, std::placeholders::_2));
   }
 
 private:
-  void handle_service_request(const std::shared_ptr<rh_plus_interface::srv::Servoinfo::Request> request,
-                              std::shared_ptr<rh_plus_interface::srv::Servoinfo::Response> response)
+  void handle_service_request(const std::shared_ptr<rh_plus_interface::srv::Servoinfos::Request> request,
+                              std::shared_ptr<rh_plus_interface::srv::Servoinfos::Response> response)
   {
     // UART 통신 후에 값을 넣기
     if (request->input == 1){
@@ -36,7 +37,7 @@ private:
 
   }
 
-  rclcpp::Service<rh_plus_interface::srv::Servoinfo>::SharedPtr server_;
+  rclcpp::Service<rh_plus_interface::srv::Servoinfos>::SharedPtr server_;
 };
 
 int main(int argc, char *argv[])

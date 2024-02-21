@@ -1,10 +1,10 @@
 # Default initial positions for rh_plus_7_axis_robot_arm's ros2_control fake system
 
 initial_positions:
-  Revolute 1: 0.0
-  Revolute 2: 0.0
-  Revolute 3: 0.0
-  Revolute 4: 0.0
-  Revolute 5: 0.0
-  Revolute 6: 0.0
-  Slider 1: 0.0
+  revolute_1: 0.0
+  revolute_2: 0.0
+  revolute_3: 0.0
+  revolute_4: 0.0
+  revolute_5: 0.0
+  revolute_6: 0.0
+  slider_1: 0.0

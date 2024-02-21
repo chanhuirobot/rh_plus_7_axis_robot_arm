@@ -17,12 +17,12 @@ controller_manager:
 arm_controller:
   ros__parameters:
     joints:
-      - Revolute 1
-      - Revolute 2
-      - Revolute 3
-      - Revolute 4
-      - Revolute 5
-      - Revolute 6
+      - revolute_1
+      - revolute_2
+      - revolute_3
+      - revolute_4
+      - revolute_5
+      - revolute_6
     command_interfaces:
       - position
     state_interfaces:
@@ -30,4 +30,4 @@ arm_controller:
       - velocity
 hand_controller:
   ros__parameters:
-    joint: Slider 1
+    joint: slider_1

@@ -40,11 +40,11 @@ joint_limits:
     max_acceleration: 0
   slider_1:
     has_velocity_limits: true
-    max_velocity: 0.15
+    max_velocity: 0.05
     has_acceleration_limits: false
     max_acceleration: 0
   slider_2:
     has_velocity_limits: true
-    max_velocity: 0.15
+    max_velocity: 0.05
     has_acceleration_limits: false
     max_acceleration: 0

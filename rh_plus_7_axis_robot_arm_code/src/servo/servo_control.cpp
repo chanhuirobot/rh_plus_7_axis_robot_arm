@@ -65,7 +65,7 @@ double length2angle(double length)
   const double d = 0.001552;
 
   // 변수 y 정의
-  double y = length + std::sqrt(b * b + (a - c) * (a - c)) - d;
+  double y = length + std::sqrt(b * b - (a - c) * (a - c)) - d;
 
   // y의 연산을 통한 angle 계산
   double angle = std::asin((y * y + a * a + c * c - b * b) / (2 * a * std::sqrt(y * y + c * c))) -

@@ -208,8 +208,8 @@
   <origin xyz="0.0 0.000163 0.045" rpy="0 0 0"/>
   <parent link="link2"/>
   <child link="link3"/>
-  <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="1.658063" lower="-1.570796" effort="100" velocity="5.8178"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="1.570796" lower="-1.658063" effort="100" velocity="5.8178"/>
 </joint>
 
 <joint name="revolute_4" type="revolute">
@@ -224,8 +224,8 @@
   <origin xyz="0.0299 -0.02519 0.0" rpy="0 0 0"/>
   <parent link="link4"/>
   <child link="link5"/>
-  <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="0.698132" lower="-2.094395" effort="100" velocity="5.8178"/>
+  <axis xyz="0.0 1.0 0.0"/>
+  <limit upper="2.094395" lower="-0.698132" effort="100" velocity="5.8178"/>
 </joint>
 
 <joint name="revolute_6" type="revolute">
@@ -241,7 +241,7 @@
   <parent link="gripper_base"/>
   <child link="gripper_hand_left"/>
   <axis xyz="0.0 -1.0 0.0"/>
-  <limit upper="0.030" lower="0.0" effort="100" velocity="0.15"/>
+  <limit upper="0.030" lower="0.0" effort="100" velocity="0.05"/>
 </joint>
 
 <joint name="slider_2" type="prismatic">
@@ -249,7 +249,7 @@
   <parent link="gripper_base"/>
   <child link="gripper_hand_right"/>
   <axis xyz="0.0 1.0 0.0"/>
-  <limit upper="0.030" lower="0.0" effort="100" velocity="0.15"/>
+  <limit upper="0.030" lower="0.0" effort="100" velocity="0.05"/>
   <mimic joint="slider_1" multiplier="1"/>
 </joint>
 

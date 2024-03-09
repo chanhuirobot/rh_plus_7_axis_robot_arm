@@ -220,7 +220,7 @@ void write_angle(int servo_id, int angle)
 	// 4. Find checksum
 	unsigned char checksum = 0;
 	unsigned char buffer[10] = {0x55,0x55,servo_num,0x07,0x01,
-                                angle_low,angle_high, 0x32, 0x00, 0x00};
+                                angle_low,angle_high, 0x00, 0x00, 0x00};
 	for (int i=2; i<10;i++){
 		checksum += buffer[i];
   }

@@ -1,19 +1,19 @@
 
-#ifndef XARM_SERIAL__H
-#define XARM_SERIAL__H
+#ifndef ROBOTARM_SERIAL__H
+#define ROBOTARM_SERIAL__H
 #include <hidapi/hidapi.h>
 #include <sstream>
 #include <vector>
 
-#include "xarm_drvr.hpp"
+#include "robotarm_drvr.hpp"
 
-namespace xarm
+namespace robotarm
 {
-	class xarm_serial: public xarm_drvr // xarm_drvr 상속
+	class robotarm_serial: public robotarm_drvr
 	{
 		public:
-			xarm_serial();
-			~xarm_serial();
+			robotarm_serial();
+			~robotarm_serial();
 
 			bool open(const std::string &portname) override;
 			void close() override;
@@ -27,4 +27,4 @@ namespace xarm
 	};
 }
 
-#endif // XARM_SERIAL__H
+#endif // ROBOTARM_SERIAL__H

@@ -1,19 +1,19 @@
 
-#ifndef XARM_USB__H
-#define XARM_USB__H
+#ifndef ROBOTARM_USB__H
+#define ROBOTARM_USB__H
 #include <hidapi/hidapi.h>
 #include <sstream>
 #include <vector>
 
-#include "xarm_drvr.hpp"
+#include "robotarm_drvr.hpp"
 
-namespace xarm
+namespace robotarm
 {
-	class xarm_usb: public xarm_drvr
+	class robotarm_usb: public robotarm_drvr
 	{
 		public:
-			xarm_usb();
-			~xarm_usb();
+			robotarm_usb();
+			~robotarm_usb();
 
 			bool open(const std::string &portname) override;
 			void close() override;
@@ -32,4 +32,4 @@ namespace xarm
 	};
 }
 
-#endif // XARM_USB__H
+#endif // ROBOTARM_USB__H

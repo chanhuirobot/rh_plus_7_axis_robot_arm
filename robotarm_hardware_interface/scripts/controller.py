@@ -35,7 +35,7 @@ def flip(m, axis):
                          % (axis, m.ndim))
     return m[tuple(indexer)]
 
-class XArm():
+class ROBOTArm():
     def __init__(self, pid=5750):
 
         # Stores an enumeration of all the connected USB HID devices
@@ -54,10 +54,10 @@ class XArm():
 
         # open a device
         self.dev.open()
-        print('Connected to xArm device')
+        print('Connected to robotArm device')
 
     def __del__(self):
-        print('Closing xArm device')
+        print('Closing robotArm device')
         self.dev.close()
 
     def move_to(self, id, pos, time=0):
@@ -121,14 +121,14 @@ class XArm():
         self.servos_off()
 
 
-class SafeXArm:
+class SafeROBOTArm:
     """
     Wrapper to limit motion range and speed to maximize durability
     Also remaps joint angles into the [-1, 1] range
     """
 
     def __init__(self, **kwargs):
-        self.arm = XArm(**kwargs)
+        self.arm = ROBOTArm(**kwargs)
 
         self.min_pos = np.array([
             100, # Base
@@ -185,7 +185,7 @@ class SafeXArm:
 
 
 def demo():
-    arm = XArm()
+    arm = ROBOTArm()
     print(f"{arm.read_pos()}")
 
     t = 500
@@ -194,23 +194,23 @@ def demo():
     arm.move_to(id=1, pos=685, time=t)
     time.sleep(2)
 
-    # Move Joint 4 
+    # Move Joint 4
     arm.move_to(id=4, pos=100, time=t)
     time.sleep(2)
 
-    # Move Joint 4 
+    # Move Joint 4
     arm.move_to(id=4, pos=400, time=t)
     time.sleep(2)
 
-    # Move Joint 4 
+    # Move Joint 4
     arm.move_to(id=4, pos=00, time=t)
     time.sleep(2)
 
-    # Move Joint 5 
+    # Move Joint 5
     arm.move_to(id=5, pos=200, time=t)
-    time.sleep(2)  
+    time.sleep(2)
 
-    # Move Joint 3 
+    # Move Joint 3
     arm.move_to(id=3, pos=500, time=t)
     time.sleep(2)
 
@@ -222,15 +222,15 @@ def demo():
     arm.move_to(id=1, pos=685, time=t)
     time.sleep(2)
 
-    # Move Joint 3 
+    # Move Joint 3
     arm.move_to(id=3, pos=150, time=t)
     time.sleep(2)
 
-    # Move Joint 2 
+    # Move Joint 2
     arm.move_to(id=2, pos=800, time=t)
     time.sleep(2)
-    
-    # Move Joint 2 
+
+    # Move Joint 2
     arm.move_to(id=2, pos=590, time=t)
     time.sleep(2)
 

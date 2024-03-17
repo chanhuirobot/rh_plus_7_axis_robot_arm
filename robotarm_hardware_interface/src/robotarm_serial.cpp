@@ -13,13 +13,13 @@
 #include <unistd.h>
 
 #include "rclcpp/rclcpp.hpp"
-#include "xarm_hardware_interface/xarm_serial.hpp"
-#include "xarm_hardware_interface/serial_servo_bus.h"
+#include "robotarm_hardware_interface/robotarm_serial.hpp"
+#include "robotarm_hardware_interface/serial_servo_bus.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // From https://stackoverflow.com/questions/6947413/how-to-open-read-and-write-from-serial-port-in-c
 
-static int set_interface_attribs(int fd, int speed) // 인터페이스 속성
+static int set_interface_attribs(int fd, int speed)
 {
     struct termios tty;
 
@@ -30,7 +30,7 @@ static int set_interface_attribs(int fd, int speed) // 인터페이스 속성
 
     cfsetospeed(&tty, (speed_t)speed);
     cfsetispeed(&tty, (speed_t)speed);
-	// 이게 뭔지 동준이형 물어보기
+
     tty.c_cflag |= (CLOCAL | CREAD);    /* ignore modem controls */
     tty.c_cflag &= ~CSIZE;
     tty.c_cflag |= CS8;         /* 8-bit characters */
@@ -71,28 +71,28 @@ static void set_mincount(int fd, int mcount, int to_x100ms)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-namespace xarm
+namespace robotarm
 {
-	xarm_serial::xarm_serial():
-		xarm_drvr(),
+	robotarm_serial::robotarm_serial():
+		robotarm_drvr(),
 		fd_(-1)
 	{
 	}
 
-	xarm_serial::~xarm_serial()
+	robotarm_serial::~robotarm_serial()
 	{
 		close();
 	}
 
-	bool xarm_serial::open(const std::string &portname)
+	bool robotarm_serial::open(const std::string &portname)
 	{
 		if (fd_ > 0) {
 			return false;
 		}
 
-		fd_ = ::open(portname.c_str(), O_RDWR | O_NOCTTY | O_SYNC); // 시리얼 포트 열기
+		fd_ = ::open(portname.c_str(), O_RDWR | O_NOCTTY | O_SYNC);
     	if (fd_ < 0) {
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "xArm, unable to open serial port [%s]",
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm, unable to open serial port [%s]",
 				strerror(errno));
 			return false;
 		}
@@ -100,11 +100,11 @@ namespace xarm
   		// 115200, 8 bits, no parity, 1 stop bit
 	    set_interface_attribs(fd_, B115200);
 		set_mincount(fd_, 0, 5);
-		RCLCPP_INFO(rclcpp::get_logger("XArmSystemHardware"), "xArm device opened ");
+		RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm device opened ");
 		return true;
 	}
 
-	void xarm_serial::close()
+	void robotarm_serial::close()
 	{
 		if (fd_ > 0) {
 			::close(fd_);
@@ -112,26 +112,26 @@ namespace xarm
 		}
 	}
 
-	bool xarm_serial::getJointPosition(int id, uint16_t &pos) // 각도 read
+	bool robotarm_serial::getJointPosition(int id, uint16_t &pos)
 	{
-		RCLCPP_DEBUG(rclcpp::get_logger("XArmSystemHardware"), "readJointPosition");
+		RCLCPP_DEBUG(rclcpp::get_logger("ROBOTArmSystemHardware"), "readJointPosition");
 		if (!LobotSerialServoReadPosition(fd_, id, pos)) {
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Failed to read servo %d position", id);
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Failed to read servo %d position", id);
 			return false;
 		}
 		return true;
 	}
 
-	bool xarm_serial::setJointPosition(int id, uint16_t pos, uint16_t time) // 각도 set
+	bool robotarm_serial::setJointPosition(int id, uint16_t pos, uint16_t time)
 	{
 		if (!LobotSerialServoMove(fd_, id, pos, time)) {
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Failed to set servo %u position", id);
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Failed to set servo %u position", id);
 			return false;
 		}
 		return true;
 	}
 
-	bool xarm_serial::setManualModeAll(bool enable, int count) // 부하를 줄지말지
+	bool robotarm_serial::setManualModeAll(bool enable, int count)
 	{
 		bool bOk = false;
 		for (int i = 0; i < count; i++) {
@@ -141,7 +141,7 @@ namespace xarm
 				bOk = LobotSerialServoLoad(fd_, i + 1);
 			}
 			if (!bOk) {
-				RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Failed to set enable mode on servo %d", i + 1);
+				RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Failed to set enable mode on servo %d", i + 1);
 				bOk = false;
 			}
 		}

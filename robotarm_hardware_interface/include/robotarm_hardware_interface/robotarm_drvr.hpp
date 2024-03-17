@@ -1,17 +1,17 @@
 
-#ifndef XARM_DRVR__H
-#define XARM_DRVR__H
+#ifndef ROBOTARM_DRVR__H
+#define ROBOTARM_DRVR__H
 #include <hidapi/hidapi.h>
 #include <sstream>
 #include <vector>
 
-namespace xarm
+namespace robotarm
 {
-	class xarm_drvr
+	class robotarm_drvr
 	{
 		public:
-			xarm_drvr() {};
-			virtual ~xarm_drvr() {};
+			robotarm_drvr() {};
+			virtual ~robotarm_drvr() {};
 
 			virtual bool open(const std::string &portname) = 0;
 			virtual void close() = 0;
@@ -22,4 +22,4 @@ namespace xarm
 	};
 }
 
-#endif // XARM_DRVR__H
+#endif // ROBOTARM_DRVR__H

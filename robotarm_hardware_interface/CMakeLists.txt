@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(xarm_hardware_interface)
+project(robotarm_hardware_interface)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -22,17 +22,17 @@ pkg_check_modules(hidapi-hidraw REQUIRED IMPORTED_TARGET hidapi-hidraw)
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/xarm_system.cpp
-  src/xarm.cpp
-  #src/xarm_usb.cpp
-  src/xarm_serial.cpp
+  src/robotarm_system.cpp
+  src/robotarm.cpp
+  #src/robotarm_usb.cpp
+  src/robotarm_serial.cpp
   src/serial_servo_bus.cpp
 )
 
 add_executable(
   "test_drvr"
   src/test.cpp
-  src/xarm_serial.cpp
+  src/robotarm_serial.cpp
   src/serial_servo_bus.cpp
 )
 
@@ -65,7 +65,7 @@ ament_target_dependencies(
 
 target_link_libraries(${PROJECT_NAME} PkgConfig::hidapi-hidraw)
 
-pluginlib_export_plugin_description_file(hardware_interface xarm_hardware.xml)
+pluginlib_export_plugin_description_file(hardware_interface robotarm_hardware.xml)
 
 # INSTALL
 install(

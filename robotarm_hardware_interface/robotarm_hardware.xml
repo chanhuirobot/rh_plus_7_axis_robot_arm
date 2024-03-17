@@ -1,0 +1,9 @@
+<library path="robotarm_hardware_interface">
+  <class name="robotarm_hardware/ROBOTArmSystemHardware"
+         type="robotarm_hardware::ROBOTArmSystemHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ROS2 control for ROBOTArm.
+    </description>
+  </class>
+</library>

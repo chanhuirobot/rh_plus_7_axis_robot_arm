@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef XARM_HARDWARE_INTERFACE__XARM_SYSTEM_HPP_
-#define XARM_HARDWARE_INTERFACE__XARM_SYSTEM_HPP_
+#ifndef ROBOTARM_HARDWARE_INTERFACE__ROBOTARM_SYSTEM_HPP_
+#define ROBOTARM_HARDWARE_INTERFACE__ROBOTARM_SYSTEM_HPP_
 
 #include <memory>
 #include <string>
@@ -24,40 +24,40 @@
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "rclcpp/macros.hpp"
-#include "xarm_hardware_interface/visibility_control.h"
-#include "xarm.h"
+#include "robotarm_hardware_interface/visibility_control.h"
+#include "robotarm.h"
 
-namespace xarm_hardware
+namespace robotarm_hardware
 {
-class XArmSystemHardware
+class ROBOTArmSystemHardware
 : public hardware_interface::SystemInterface
 {
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(XArmSystemHardware);
+  RCLCPP_SHARED_PTR_DEFINITIONS(ROBOTArmSystemHardware);
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
-  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override; // init
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
+  CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state) override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   hardware_interface::return_type read(const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
-  XARM_HARDWARE_INTERFACE_PUBLIC
+  ROBOTARM_HARDWARE_INTERFACE_PUBLIC
   hardware_interface::return_type write(const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
 private:
-  // Parameters for the XArm simulation
+  // Parameters for the ROBOTArm simulation
   double hw_start_sec_;
   double hw_stop_sec_;
   double hw_slowdown_;
@@ -69,9 +69,9 @@ private:
   std::vector<double> hw_states_;
   std::vector<std::string> hw_joint_name_;
 
-  xarm::xarm xarm;
+  robotarm::robotarm robotarm;
 };
 
-}  // namespace xarm_hardware
+}  // namespace robotarm_hardware
 
-#endif  // XARM_HARDWARE_INTERFACE__XARM_SYSTEM_HPP_
+#endif  // ROBOTARM_HARDWARE_INTERFACE__ROBOTARM_SYSTEM_HPP_

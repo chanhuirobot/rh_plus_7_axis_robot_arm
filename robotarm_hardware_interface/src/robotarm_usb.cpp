@@ -2,28 +2,28 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vector>     
+#include <vector>
 
 #include "rclcpp/rclcpp.hpp"
-#include "xarm_hardware_interface/xarm_usb.hpp"
+#include "robotarm_hardware_interface/robotarm_usb.hpp"
 
 ///// WARNING, WARNING - this re-implemenation has not been tested.  My USB board died
-///// so I switched to the serial board. 
+///// so I switched to the serial board.
 
-namespace xarm
+namespace robotarm
 {
-	xarm_usb::xarm_usb():
-		xarm_drvr(),
+	robotarm_usb::robotarm_usb():
+		robotarm_drvr(),
 		handle_(NULL)
 	{
 	}
 
-	xarm_usb::~xarm_usb()
+	robotarm_usb::~robotarm_usb()
 	{
 		close();
 	}
 
-	bool xarm_usb::open(const std::string &portname)
+	bool robotarm_usb::open(const std::string &portname)
 	{
 		(void)portname;
 		if (handle_) {
@@ -45,7 +45,7 @@ namespace xarm
 			std::string product(ws.begin(), ws.end());
 
 			if (product == "LOBOT") {
-				RCLCPP_INFO(rclcpp::get_logger("XArmSystemHardware"), "xArm found ");
+				RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm found ");
 				found = true;
 				break;
 			}
@@ -56,19 +56,19 @@ namespace xarm
 			handle_ = hid_open_path(cur_dev->path);
 
 			if (!handle_) {
-				RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "xArm, unable to open device");
+				RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm, unable to open device");
 			} else {
-				RCLCPP_INFO(rclcpp::get_logger("XArmSystemHardware"), "xArm device opened ");
+				RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm device opened ");
 			}
-		} else {		
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "xArm not found, make sure it is power on ");
+		} else {
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "robotArm not found, make sure it is power on ");
 			return false;
 		}
 		hid_free_enumeration(devs);
 		return handle_? true: false;
 	}
 
-	void xarm_usb::close()
+	void robotarm_usb::close()
 	{
 		if (handle_) {
 			hid_close(handle_);
@@ -78,7 +78,7 @@ namespace xarm
 		}
 	}
 
-	void xarm_usb::printDeviceInformation()
+	void robotarm_usb::printDeviceInformation()
 	{
 		struct hid_device_info *devs = hid_enumerate(0x0, 0x0);
 		struct hid_device_info *cur_dev = devs;
@@ -95,9 +95,9 @@ namespace xarm
 		hid_free_enumeration(devs);
 	}
 
-	bool xarm_usb::readJointPositionAll(std::vector<uint16_t> &pos)
+	bool robotarm_usb::readJointPositionAll(std::vector<uint16_t> &pos)
 	{
-		RCLCPP_DEBUG(rclcpp::get_logger("XArmSystemHardware"), "readJointPositionAll");
+		RCLCPP_DEBUG(rclcpp::get_logger("ROBOTArmSystemHardware"), "readJointPositionAll");
 
 		int count = pos.size();
 		{
@@ -111,8 +111,8 @@ namespace xarm
 
 			int res = hid_write(handle_, buf.data(), buf.size());
 			if (res < 0) {
-				RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Unable to write()");
-				RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Error: %ls", hid_error(handle_));
+				RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Unable to write()");
+				RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Error: %ls", hid_error(handle_));
 				return false;
 			}
 		}
@@ -125,11 +125,11 @@ namespace xarm
 				if (res > 0) {
 					break;
 				} else if (res == 0) {
-					RCLCPP_INFO(rclcpp::get_logger("XArmSystemHardware"), "waiting...");
+					RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "waiting...");
 				} else if (res < 0) {
-					RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Unable to read()");
+					RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Unable to read()");
 					return false;
-				}				
+				}
 				usleep(500*1000);
 			} while (res == 0);
 
@@ -139,13 +139,13 @@ namespace xarm
 				p_msb= buf_out[2 + 3*(i + 1) + 2];
 				pos[i] = (p_msb << 8) | p_lsb;
 			}
-		}			
+		}
 		return true;
 	}
 
-	bool xarm_usb::setJointPosition(int id, uint16_t pos, uint16_t time)
+	bool robotarm_usb::setJointPosition(int id, uint16_t pos, uint16_t time)
 	{
-		std::vector<uint8_t> buf {0x55, 0x55, 8, 3, 1, 
+		std::vector<uint8_t> buf {0x55, 0x55, 8, 3, 1,
 									(uint8_t)(time & 0xFF),
 									(uint8_t)(time >> 8),
 									(uint8_t)id,
@@ -154,15 +154,15 @@ namespace xarm
 
 		int res = hid_write(handle_, buf.data(), buf.size());
 		if (res < 0) {
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Unable to write()");
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Error: %ls", hid_error(handle_));
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Unable to write()");
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Error: %ls", hid_error(handle_));
 			return false;
 		}
 		return true;
 	}
 
 	// Always enables manual mode for USB implemenation - send position command to exit manual mode.
-	bool xarm_usb::setManualModeAll(bool enable, int count)
+	bool robotarm_usb::setManualModeAll(bool enable, int count)
 	{
 		(void)enable;
 		std::vector<uint8_t> buf {0x55, 0x55, 0, 20, 0};
@@ -175,8 +175,8 @@ namespace xarm
 
 		int res = hid_write(handle_, buf.data(), buf.size());
 		if (res < 0) {
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Unable to write servo disable cmd");
-			RCLCPP_ERROR(rclcpp::get_logger("XArmSystemHardware"), "Error: %ls", hid_error(handle_));
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Unable to write servo disable cmd");
+			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Error: %ls", hid_error(handle_));
 			return false;
 		}
 		return true;

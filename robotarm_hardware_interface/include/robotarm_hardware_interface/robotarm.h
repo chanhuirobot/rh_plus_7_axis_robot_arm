@@ -1,6 +1,6 @@
 
-#ifndef XARM__H
-#define XARM__H
+#ifndef ROBOTARM__H
+#define ROBOTARM__H
 #include <hidapi/hidapi.h>
 #include <sstream>
 #include <map>
@@ -8,11 +8,11 @@
 #include <thread>
 #include <mutex>
 
-#include "xarm_hardware_interface/xarm_drvr.hpp"
+#include "robotarm_hardware_interface/robotarm_drvr.hpp"
 
-namespace xarm
+namespace robotarm
 {
-	class xarm
+	class robotarm
 	{
 		struct JointRangeLimits {
 			float range_rad;	// Range in radians corresponding to max-min servo units
@@ -31,8 +31,8 @@ namespace xarm
 		using PositionMap = std::map<std::string, struct Position>;
 
 		public:
-			xarm();
-			~xarm();
+			robotarm();
+			~robotarm();
 
 			bool init();
 
@@ -59,7 +59,7 @@ namespace xarm
 			bool inited_;
 			bool run_;
 
-			std::unique_ptr<xarm_drvr> drvr_;
+			std::unique_ptr<robotarm_drvr> drvr_;
 
 			std::mutex mutex_;
 			std::thread thread_;
@@ -67,9 +67,9 @@ namespace xarm
 			std::map<std::string, int> joint_name_map_;
 			std::map<std::string, struct JointRangeLimits> joint_range_limits_;
 
-			// Map of joint to the last position set on the joint (in xarm units)
+			// Map of joint to the last position set on the joint (in robotarm units)
 			PositionMap last_pos_set_map_;
-			// Map of joint to the last position status read for the joint (in xarm units)
+			// Map of joint to the last position status read for the joint (in robotarm units)
 			PositionMap last_pos_get_map_;
 
 			double gripper_pos_min_m_;

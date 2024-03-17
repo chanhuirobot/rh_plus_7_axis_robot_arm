@@ -2,7 +2,7 @@
 //
 // Based on Arduino source code provided by HiWonder
 //
-// 헤더 불러오기
+
 #include <iostream>
 #include <cstdint>
 #include <errno.h>
@@ -11,17 +11,16 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "xarm_hardware_interface/serial_servo_bus.h"
-// 메크로 function..?
+#include "robotarm_hardware_interface/serial_servo_bus.h"
+
 #define GET_LOW_uint8_t(A) (uint8_t)((A))
 // Macro function  get lower 8 bits of A
 #define GET_HIGH_uint8_t(A) (uint8_t)((A) >> 8)
-// Macro function  get higher 8 bits of A 상위 8비트 오른쪽(하위)으로 이동!
+// Macro function  get higher 8 bits of A
 #define uint8_t_TO_HW(A, B) ((((uint16_t)(A)) << 8) | (uint8_t)(B))
 // put A as higher 8 bits   B as lower 8 bits   which amalgamated into 16 bits
 // integer
 
-// 각종 명령어
 #define LOBOT_SERVO_FRAME_HEADER 0x55
 #define LOBOT_SERVO_MOVE_TIME_WRITE 1
 #define LOBOT_SERVO_MOVE_TIME_READ 2
@@ -51,27 +50,26 @@
 #define LOBOT_SERVO_LED_CTRL_READ 34
 #define LOBOT_SERVO_LED_ERROR_WRITE 35
 #define LOBOT_SERVO_LED_ERROR_READ 36
-// 체크섬 비트
+
 static uint8_t LobotCheckSum(uint8_t buf[]) {
   uint8_t i;
   uint16_t temp = 0;
-  for (i = 2; i < buf[3] + 2; i++) { // buf[3]에 길이 데이터 있음
+  for (i = 2; i < buf[3] + 2; i++) {
     temp += buf[i];
   }
   temp = ~temp;
   i = (uint8_t)temp;
   return i;
 }
-// 완벽하게 이해는 불가... fd가 무엇일까..? File Descriptor 운영체제가 특정 파일에 할당해주는 정수값
-// 일단은 출력하는 거로 이해.
+
 static bool writeMsg(int fd, const uint8_t *buf, int len) {
   if (len != write(fd, buf, len)) {
     return false;
   }
-  tcdrain(fd); // 출력이 완료되도록 대기합니다.
+  tcdrain(fd);
   return true;
 }
-// 서보 제어
+
 bool LobotSerialServoMove(int fd, uint8_t id, int16_t position, uint16_t time) {
   const int msgLen = 10;
   uint8_t buf[msgLen];
@@ -92,7 +90,7 @@ bool LobotSerialServoMove(int fd, uint8_t id, int16_t position, uint16_t time) {
   buf[9] = LobotCheckSum(buf);
   return writeMsg(fd, buf, msgLen);
 }
-// 제어 멈춤
+
 bool LobotSerialServoStopMove(int fd, uint8_t id) {
   const int msgLen = 6;
   uint8_t buf[msgLen];
@@ -103,7 +101,7 @@ bool LobotSerialServoStopMove(int fd, uint8_t id) {
   buf[5] = LobotCheckSum(buf);
   return writeMsg(fd, buf, msgLen);
 }
-// ID 변경
+
 bool LobotSerialServoSetID(int fd, uint8_t oldID, uint8_t newID) {
   const int msgLen = 7;
   uint8_t buf[msgLen];
@@ -115,7 +113,7 @@ bool LobotSerialServoSetID(int fd, uint8_t oldID, uint8_t newID) {
   buf[6] = LobotCheckSum(buf);
   return writeMsg(fd, buf, msgLen);
 }
-// 모드 세팅
+
 bool LobotSerialServoSetMode(int fd, uint8_t id, uint8_t Mode, int16_t Speed) {
   const int msgLen = 10;
   uint8_t buf[msgLen];
@@ -131,7 +129,7 @@ bool LobotSerialServoSetMode(int fd, uint8_t id, uint8_t Mode, int16_t Speed) {
   return writeMsg(fd, buf, msgLen);
 }
 
-// Doesn't work 토크 걸기
+// Doesn't work
 bool LobotSerialServoLoad(int fd, uint8_t id) {
   const int msgLen = 7;
   uint8_t buf[msgLen];
@@ -145,7 +143,7 @@ bool LobotSerialServoLoad(int fd, uint8_t id) {
   return writeMsg(fd, buf, msgLen);
 }
 
-// Doesn't work 토크 빼기
+// Doesn't work
 bool LobotSerialServoUnload(int fd, uint8_t id) {
   const int msgLen = 7;
   uint8_t buf[msgLen];
@@ -159,7 +157,7 @@ bool LobotSerialServoUnload(int fd, uint8_t id) {
   //std::cerr << "unload" << std::endl;
   return writeMsg(fd, buf, msgLen);
 }
-// 메시지 수신 resp에 저장
+
 static bool ReceiveResponse(int fd, uint8_t *resp, int max_resp) {
   bool frameStarted = false;
   uint8_t frameCount = 0;
@@ -215,7 +213,7 @@ static bool ReceiveResponse(int fd, uint8_t *resp, int max_resp) {
     }
   }
 }
-// 보내고 받기
+
 static bool ReadCommand2ByteReturn(int fd, uint8_t id, uint8_t cmd,
                                    uint16_t &val) {
   val = -2048;
@@ -235,11 +233,11 @@ static bool ReadCommand2ByteReturn(int fd, uint8_t id, uint8_t cmd,
   }
   return false;
 }
-// pos
+
 bool LobotSerialServoReadPosition(int fd, uint8_t id, uint16_t &position) {
   return ReadCommand2ByteReturn(fd, id, LOBOT_SERVO_POS_READ, position);
 }
-// voltage
+
 bool LobotSerialServoReadVin(int fd, uint8_t id, uint16_t &vin) {
   return ReadCommand2ByteReturn(fd, id, LOBOT_SERVO_VIN_READ, vin);
 }

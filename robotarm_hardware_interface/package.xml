@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>xarm_hardware_interface</name>
+  <name>robotarm_hardware_interface</name>
   <version>0.0.0</version>
-  <description>The xarm_hardware_interface package</description>
+  <description>The robotarm_hardware_interface package</description>
 
   <maintainer email="none@none.com">None</maintainer>
 

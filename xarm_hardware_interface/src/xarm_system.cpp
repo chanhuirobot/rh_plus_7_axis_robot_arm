@@ -53,6 +53,9 @@ namespace xarm_hardware
   for (const hardware_interface::ComponentInfo & joint : info_.joints)
   {
     // XArmSystem has exactly one state and command interface on each joint
+    // 에러 메시지 띄우기
+
+    // 사이즈 에러
     if (joint.command_interfaces.size() != 1)
     {
       RCLCPP_FATAL(
@@ -101,13 +104,14 @@ std::vector<hardware_interface::StateInterface> XArmSystemHardware::export_state
   for (uint i = 0; i < info_.joints.size(); i++)
   {
 	  hw_joint_name_[i] = info_.joints[i].name;
+    // emplace_back 객체를 생성하여 벡터에 집어넣기
     state_interfaces.emplace_back(hardware_interface::StateInterface(
       info_.joints[i].name, hardware_interface::HW_IF_POSITION, &hw_states_[i]));
   }
 
   return state_interfaces;
 }
-
+// 여기부터
 std::vector<hardware_interface::CommandInterface> XArmSystemHardware::export_command_interfaces()
 {
   std::vector<hardware_interface::CommandInterface> command_interfaces;

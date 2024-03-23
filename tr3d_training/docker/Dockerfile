@@ -34,4 +34,6 @@ RUN git clone https://github.com/NVIDIA/MinkowskiEngine.git /minkowskiengine
 WORKDIR /minkowskiengine
 RUN python setup.py install --force_cuda --blas=openblas
 
+# build and result show depend library
 RUN pip install yapf==0.40.0
+RUN pip install open3d

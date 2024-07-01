@@ -38,7 +38,7 @@ const int FIRST_SET_MOVE_TIME = 1500;
 
 const int NUM_JOINTS = 7;
 
-const std::string SERIAL_DEV = "/dev/servo_driver";
+const std::string SERIAL_DEV = "/dev/ttyUSB0";
 
 namespace robotarm
 {

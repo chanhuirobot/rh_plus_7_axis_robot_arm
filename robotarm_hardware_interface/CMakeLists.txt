@@ -29,15 +29,17 @@ add_library(
   src/serial_servo_bus.cpp
 )
 
-add_executable(
-  "test_drvr"
+add_executable(robotarm_hardware_interface_node
   src/test.cpp
+
+  src/robotarm_system.cpp
+  src/robotarm.cpp
   src/robotarm_serial.cpp
   src/serial_servo_bus.cpp
 )
 
 target_include_directories(
-  "test_drvr"
+  robotarm_hardware_interface_node
   PRIVATE
   include
 )
@@ -58,7 +60,7 @@ ament_target_dependencies(
 )
 
 ament_target_dependencies(
-  "test_drvr"
+  robotarm_hardware_interface_node
   hardware_interface
   rclcpp
 )
@@ -70,17 +72,17 @@ pluginlib_export_plugin_description_file(hardware_interface robotarm_hardware.xm
 # INSTALL
 install(
   TARGETS ${PROJECT_NAME}
-  DESTINATION lib
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 install(
-  TARGETS "test_drvr"
-  DESTINATION lib
+  TARGETS robotarm_hardware_interface_node
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 install(
   DIRECTORY include/
-  DESTINATION include
+  DESTINATION include/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)

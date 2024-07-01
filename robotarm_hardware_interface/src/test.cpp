@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <memory>
 #include <chrono>
@@ -12,7 +11,7 @@
 
 const int NUM_JOINTS = 7;
 
-const std::string SERIAL_DEV = "/dev/servo_driver";
+const std::string SERIAL_DEV = "/dev/ttyUSB0";
 
 int main(int argc, char **argv)
 {
@@ -27,14 +26,21 @@ int main(int argc, char **argv)
         return false;
     }
 
-	if (!drvr_->setJointPosition(1, 200, 2000)) {
+    for (i = 0; i < 1000; i = i + 1){
+        drvr_->setJointPosition(2, i, 0);
+        std::this_thread::sleep_for(std::chrono::milliseconds(4));
+    }
+
+	if (!drvr_->setJointPosition(2, 200, 4000)) {
         std::cerr << "Failed to set servo position" << std::endl;
     } else {
         std::cerr << "Set joint position" << std::endl;
     }
 
+
+
     for (i = 0; i < 5*2; i++) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(200) );
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
 
         if (drvr_->getJointPosition(1, pos)) {
             std::cout << "servo " << i << ", pos: " << pos << std::endl;

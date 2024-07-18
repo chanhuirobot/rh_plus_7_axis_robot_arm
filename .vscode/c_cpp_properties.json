@@ -1,0 +1,63 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/chanhuirobot/ros2_ws/install/velocity_controllers/include/**",
+        "/home/chanhuirobot/ros2_ws/install/tricycle_steering_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/tricycle_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_8/include/**",
+        "/home/chanhuirobot/ros2_ws/install/transmission_interface/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_11/include/**",
+        "/home/chanhuirobot/ros2_ws/install/bicycle_steering_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ackermann_steering_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/steering_controllers_library/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_9/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_7/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_6/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_5/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_4/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_3/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_2/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_14/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_12/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_10/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_demo_example_1/include/**",
+        "/home/chanhuirobot/ros2_ws/install/gazebo_ros2_control/include/**",
+        "/home/chanhuirobot/ros2_ws/install/controller_manager/include/**",
+        "/home/chanhuirobot/ros2_ws/install/ros2_control_test_assets/include/**",
+        "/home/chanhuirobot/ros2_ws/install/range_sensor_broadcaster/include/**",
+        "/home/chanhuirobot/ros2_ws/install/position_controllers/include/**",
+        "/home/chanhuirobot/ros2_ws/install/admittance_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/joint_trajectory_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/joint_state_broadcaster/include/**",
+        "/home/chanhuirobot/ros2_ws/install/imu_sensor_broadcaster/include/**",
+        "/home/chanhuirobot/ros2_ws/install/gripper_controllers/include/**",
+        "/home/chanhuirobot/ros2_ws/install/effort_controllers/include/**",
+        "/home/chanhuirobot/ros2_ws/install/forward_command_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/force_torque_sensor_broadcaster/include/**",
+        "/home/chanhuirobot/ros2_ws/install/diff_drive_controller/include/**",
+        "/home/chanhuirobot/ros2_ws/install/realtime_tools/include/**",
+        "/home/chanhuirobot/ros2_ws/install/joint_limits/include/**",
+        "/home/chanhuirobot/ros2_ws/install/controller_interface/include/**",
+        "/home/chanhuirobot/ros2_ws/install/hardware_interface/include/**",
+        "/home/chanhuirobot/ros2_ws/install/controller_manager_msgs/include/**",
+        "/home/chanhuirobot/ros2_ws/install/control_msgs/include/**",
+        "/home/chanhuirobot/robot_ws/install/robotarm_hardware_interface/include/**",
+        "/home/chanhuirobot/robot_ws/install/rh_plus_interface/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/chanhuirobot/robot_ws/src/rh_plus_7_axis_robot_arm/robotarm_hardware_interface/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

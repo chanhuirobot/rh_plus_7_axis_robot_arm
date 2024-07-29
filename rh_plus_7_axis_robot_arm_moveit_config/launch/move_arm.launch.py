@@ -94,7 +94,7 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [
                     FindPackageShare(moveit_config_package),
-                    "srdf",
+                    "config",
                     "rh_plus_7_axis_robot_arm.srdf.xacro",
                 ]
             ),
@@ -168,7 +168,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "__controller_parameters_basename",
-            default_value=["ros2_controllers"]
+            default_value=["ros2_controllers.yaml"]
         )
     )
 

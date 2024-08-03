@@ -5,6 +5,7 @@ from os import path
 from typing import List
 
 import yaml
+import launch_ros.descriptions
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -50,7 +51,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(description_package), description_filepath]
+                [FindPackageShare(moveit_config_package), description_filepath]
             ),
             " ",
             "name:=",
@@ -92,11 +93,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [
-                    FindPackageShare(moveit_config_package),
-                    "config",
-                    "rh_plus_7_axis_robot_arm.srdf.xacro",
-                ]
+                [FindPackageShare(moveit_config_package), "config/rh_plus_7_axis_robot_arm.srdf.xacro"]
             ),
             " ",
             "name:=",
@@ -107,6 +104,7 @@ def generate_launch_description():
             " ",
         ]
     )
+
     robot_description_semantic = {
         "robot_description_semantic": _robot_description_semantic_xml
     }
@@ -299,7 +297,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "description_filepath",
-            default_value="urdf/rh_plus_7_axis_robot_arm.urdf.xacro",
+            default_value="config/rh_plus_7_axis_robot_arm.urdf.xacro",
             description="Path to xacro or URDF description of the robot, relative to share of `description_package`.",
         ),
         # Naming of the robot

@@ -93,7 +93,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare(moveit_config_package), "config/rh_plus_7_axis_robot_arm.srdf.xacro"]
+                [FindPackageShare(moveit_config_package), "config/rh_plus_7_axis_robot_arm.srdf"]
             ),
             " ",
             "name:=",
@@ -201,7 +201,6 @@ def generate_launch_description():
             output="log",
             arguments=["--ros-args", "--log-level", log_level],
             parameters=[
-                robot_description,
                 controller_parameters,
                 {"use_sim_time": use_sim_time},
             ],

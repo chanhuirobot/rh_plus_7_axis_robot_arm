@@ -1,6 +1,6 @@
 planning_plugin: ompl_interface/OMPLPlanner
 request_adapters: >-
-  default_planner_request_adapters/AddTimeParameterization
+  default_planner_request_adapters/AddTimeOptimalParameterization
   default_planner_request_adapters/ResolveConstraintFrames
   default_planner_request_adapters/FixWorkspaceBounds
   default_planner_request_adapters/FixStartStateBounds
@@ -131,7 +131,7 @@ planner_configs:
     max_failures: 5000  # maximum consecutive failure limit. default: 5000
   TrajOptDefault:
     type: geometric::TrajOpt
-lss_arm:
+arm:
   default_planner_config: RRTConnectkConfigDefault
   planner_configs:
     - SBLkConfigDefault
@@ -158,7 +158,7 @@ lss_arm:
     - SPARSkConfigDefault
     - SPARStwokConfigDefault
     - TrajOptDefault
-gripper:
+hand:
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault

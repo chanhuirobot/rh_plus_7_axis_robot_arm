@@ -247,7 +247,7 @@ def generate_launch_description():
     ]
 
     # Add nodes for loading controllers
-    for controller in ["joint_state_broadcaster", "arm_trajectory_controller", "gripper_action_controller"]:
+    for controller in ["joint_state_broadcaster", "arm_controller", "hand_controller"]:
         nodes.append(
             Node(
                 package="controller_manager",

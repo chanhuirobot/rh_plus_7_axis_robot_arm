@@ -30,7 +30,9 @@ add_library(
   src/serial_servo_bus.cpp
 )
 
-add_executable(robotarm_hardware_interface_node
+# 순수 조인트 테스트... 절대로 로봇에 물려서 작동하면 안됨!!!
+# 모터 7개 단독으로 있을 때만 사용
+add_executable(test_node
   src/test.cpp
 
   src/robotarm_system.cpp
@@ -40,7 +42,7 @@ add_executable(robotarm_hardware_interface_node
 )
 
 target_include_directories(
-  robotarm_hardware_interface_node
+  test_node
   PRIVATE
   include
 )
@@ -61,7 +63,7 @@ ament_target_dependencies(
 )
 
 ament_target_dependencies(
-  robotarm_hardware_interface_node
+  test_node
   hardware_interface
   rclcpp
 )
@@ -77,7 +79,7 @@ install(
 )
 
 install(
-  TARGETS robotarm_hardware_interface_node
+  TARGETS test_node
   DESTINATION lib/${PROJECT_NAME}
 )
 

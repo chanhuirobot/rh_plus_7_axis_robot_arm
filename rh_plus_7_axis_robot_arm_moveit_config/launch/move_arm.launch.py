@@ -253,7 +253,7 @@ def generate_launch_description():
                 package="controller_manager",
                 executable="spawner",
                 output="log",
-                arguments=[controller, "--ros-args", "--log-level", log_level],
+                arguments=[controller, "--controller-manager", "/controller_manager"],
                 parameters=[{"use_sim_time": use_sim_time}],
              ),
         )

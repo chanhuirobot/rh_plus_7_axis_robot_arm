@@ -232,7 +232,7 @@ namespace robotarm
 		// 그리퍼 연산
 		if (joint_name == "robotarm_7_joint") {
 			// 일단 jointValue를 radia 단위인 angle로..!
-			angle = convertUnitToRad(joint_name, jointValue);
+			double angle = convertUnitToRad(joint_name, jointValue);
 
 			// 이제 angle을 거리(m)로 바꾸자
 			position = std::sqrt(B * B - (A * std::cos(angle) - C) * (A * std::cos(angle) - C)) + A * std::sin(angle) - std::sqrt(B * B - (A - C) * (A - C)) + D;
@@ -278,23 +278,7 @@ namespace robotarm
 		for (auto const &j : joint_name_map_)
 		{
 			std::string name = j.first;
-#if defined(EEF_3_FINGER)
-			// If mirrored joint 1
-			if (name == "robotarm_8_joint_mirror_1" ||
-					name == "robotarm_8_joint_mirror_2")
-			{
-				joint_id = joint_name_map_["robotarm_8_joint"];
-#else
-			// If mirrored joint 1
-			if (name == "robotarm_1_joint_mirror")
-			{
-				joint_id = joint_name_map_["robotarm_1_joint"];
-#endif
-			}
-			else
-			{
-				joint_id = j.second;
-			}
+			joint_id = j.second;
 
 			uint16_t p;
 			if (!drvr_->getJointPosition(joint_id, p))

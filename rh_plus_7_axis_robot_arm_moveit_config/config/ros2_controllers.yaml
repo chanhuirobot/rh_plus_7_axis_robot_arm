@@ -31,7 +31,8 @@ arm_controller:
 
 hand_controller:
   ros__parameters:
-    joint: slider_1
+    joint:
+      - slider_1
     command_interfaces:
       - position
     state_interfaces:

@@ -9,5 +9,5 @@
     <xacro:include filename="rh_plus_7_axis_robot_arm.ros2_control.xacro" />
 
 
-    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="ROBOTArmSystem" initial_positions_file="$(arg initial_positions_file)"/>
+    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="rh_plus_7_axis_robot_arm" initial_positions_file="$(arg initial_positions_file)"/>
 </robot>

@@ -185,11 +185,11 @@ def generate_launch_description():
             package="robot_state_publisher",
             executable="robot_state_publisher",
             output="log",
-            arguments=["--ros-args", "--log-level", log_level],
+            # arguments=["--ros-args", "--log-level", log_level],
             parameters=[
                 robot_description,
                 {
-                    "publish_frequency": 30.0,
+                    "publish_frequency": 50.0,
                     "frame_prefix": "",
                     "use_sim_time": use_sim_time,
                 },
@@ -199,7 +199,7 @@ def generate_launch_description():
             package="controller_manager",
             executable="ros2_control_node",
             output="log",
-            arguments=["--ros-args", "--log-level", log_level],
+            # arguments=["--ros-args", "--log-level", log_level],
             parameters=[
                 controller_parameters,
                 {"use_sim_time": use_sim_time},
@@ -209,7 +209,7 @@ def generate_launch_description():
             package="moveit_ros_move_group",
             executable="move_group",
             output="log",
-            arguments=["--ros-args", "--log-level", log_level],
+            # arguments=["--ros-args", "--log-level", log_level],
             parameters=[
                 robot_description,
                 robot_description_semantic,
@@ -230,9 +230,9 @@ def generate_launch_description():
             arguments=[
                 "--display-config",
                 rviz_config,
-                "--ros-args",
-                "--log-level",
-                log_level,
+                # "--ros-args",
+                # "--log-level",
+                # log_level,
             ],
             parameters=[
                 robot_description,
@@ -252,6 +252,7 @@ def generate_launch_description():
             Node(
                 package="controller_manager",
                 executable="spawner",
+                name = controller + '_node',
                 output="log",
                 arguments=[controller, "--controller-manager", "/controller_manager"],
                 parameters=[{"use_sim_time": use_sim_time}],

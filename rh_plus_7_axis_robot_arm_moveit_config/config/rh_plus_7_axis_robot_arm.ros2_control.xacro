@@ -1,14 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="rh_plus_7_axis_robot_arm_ros2_control" params="name initial_positions_file">
+    <xacro:macro name="rh_plus_7_axis_robot_arm_ros2_control" params="name initial_positions_file ros2_control_hardware_type">
         <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_file)['initial_positions']}"/>
 
         <ros2_control name="${name}" type="system">
             <hardware>
-                <!-- By default, set up controllers for simulation. This won't work on real hardware -->
-                <!-- <plugin>mock_components/GenericSystem</plugin> sa-->
-                <plugin>robotarm_hardware/ROBOTArmSystemHardware</plugin>
+                <xacro:if value="${ros2_control_hardware_type == 'fake'}">
+                    <plugin>mock_components/GenericSystem</plugin>
+                </xacro:if>
+                <xacro:if value="${ros2_control_hardware_type == 'real'}">
+                    <plugin>robotarm_hardware/ROBOTArmSystemHardware</plugin>
+                    <param name="joint_commands_topic">/robotarm_joint_commands</param>
+                    <param name="joint_states_topic">/robotarm_joint_states</param>
+                </xacro:if>
             </hardware>
+
             <joint name="revolute_1">
                 <command_interface name="position"/>
                 <state_interface name="position">
@@ -48,13 +54,6 @@
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['revolute_6']}</param>
-                </state_interface>
-                <state_interface name="velocity"/>
-            </joint>
-            <joint name="slider_1">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['slider_1']}</param>
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>

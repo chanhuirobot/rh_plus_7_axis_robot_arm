@@ -16,6 +16,11 @@ controller_manager:
 
 arm_controller:
   ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
     joints:
       - revolute_1
       - revolute_2
@@ -23,24 +28,8 @@ arm_controller:
       - revolute_4
       - revolute_5
       - revolute_6
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
+
 
 hand_controller:
   ros__parameters:
-    joint:
-      - slider_1
-    command_interfaces:
-      - position
-    state_interfaces:
-      - position
-      - velocity
-    action_monitor_rate: 20.0
-    # allow_stalling: true
-    goal_tolerance: 0.1
-    max_effort: 0.7
-    stall_velocity_threshold: 0.001
-    stall_timeout: 1.0
+    joint: slider_1

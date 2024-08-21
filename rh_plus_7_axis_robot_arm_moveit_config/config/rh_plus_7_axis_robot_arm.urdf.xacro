@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rh_plus_7_axis_robot_arm">
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="ros2_control_hardware_type" default="fake" />
 
     <!-- Import rh_plus_7_axis_robot_arm urdf file -->
     <xacro:include filename="$(find rh_plus_7_axis_robot_arm_description)/urdf/rh_plus_7_axis_robot_arm.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="rh_plus_7_axis_robot_arm.ros2_control.xacro" />
+    <xacro:include filename="rh_plus_7_axis_robot_arm_hand.ros2_control.xacro" />
 
-
-    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="rh_plus_7_axis_robot_arm" initial_positions_file="$(arg initial_positions_file)"/>
+    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="RobotarmFakeSystem" initial_positions_file="$(arg initial_positions_file)" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
+    <xacro:rh_plus_7_axis_robot_arm_hand_ros2_control name="RobotarmHandFakeSystem" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
 </robot>

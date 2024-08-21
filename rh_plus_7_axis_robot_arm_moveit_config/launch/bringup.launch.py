@@ -78,7 +78,7 @@ def generate_launch_description():
             "ros2_control:=",
             ros2_control,
             " ",
-            "ros2_control_plugin:=",
+            "ros2_control_hardware_type:=",
             ros2_control_plugin,
             " ",
             "gazebo_preserve_fixed_joint:=",
@@ -224,10 +224,7 @@ def generate_launch_description():
             executable="rviz2",
             name="rviz2",
             output="log",
-            arguments=[
-                "--display-config",
-                rviz_config,
-            ],
+            arguments=["--display-config", rviz_config],
             parameters=[
                 robot_description,
                 robot_description_semantic,
@@ -357,7 +354,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             "rviz_config",
             default_value=path.join(
                 get_package_share_directory("rh_plus_7_axis_robot_arm_moveit_config"),
-                "rviz",
+                "config",
                 "moveit.rviz",
             ),
             description="Path to configuration for RViz2.",

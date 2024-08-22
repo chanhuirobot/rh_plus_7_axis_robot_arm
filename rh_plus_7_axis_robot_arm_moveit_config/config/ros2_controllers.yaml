@@ -20,7 +20,6 @@ arm_controller:
       - position
     state_interfaces:
       - position
-      - velocity
     joints:
       - revolute_1
       - revolute_2

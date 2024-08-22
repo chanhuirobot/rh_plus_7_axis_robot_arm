@@ -10,6 +10,6 @@
     <xacro:include filename="rh_plus_7_axis_robot_arm.ros2_control.xacro" />
     <xacro:include filename="rh_plus_7_axis_robot_arm_hand.ros2_control.xacro" />
 
-    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="RobotarmFakeSystem" initial_positions_file="$(arg initial_positions_file)" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
-    <xacro:rh_plus_7_axis_robot_arm_hand_ros2_control name="RobotarmHandFakeSystem" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
+    <xacro:rh_plus_7_axis_robot_arm_ros2_control name="RobotarmSystem" initial_positions_file="$(arg initial_positions_file)" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
+    <xacro:rh_plus_7_axis_robot_arm_hand_ros2_control name="RobotarmHandSystem" ros2_control_hardware_type="$(arg ros2_control_hardware_type)"/>
 </robot>

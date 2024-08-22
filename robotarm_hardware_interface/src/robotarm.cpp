@@ -93,38 +93,24 @@ namespace robotarm
 			return false;
 		}
 
-		joint_name_map_.insert(std::make_pair("robotarm_1_joint", 1));
-		joint_name_map_.insert(std::make_pair("robotarm_2_joint", 2));
-		joint_name_map_.insert(std::make_pair("robotarm_3_joint", 3));
-		joint_name_map_.insert(std::make_pair("robotarm_4_joint", 4));
-		joint_name_map_.insert(std::make_pair("robotarm_5_joint", 5));
-		joint_name_map_.insert(std::make_pair("robotarm_6_joint", 6));
-		joint_name_map_.insert(std::make_pair("robotarm_7_joint", 7));
-
-		// 근데 우리는 선형적으로 변하는 것이 아니라 아래 코드를 손봐야 될듯
-		// gripper range servo units:             700   -  200
-		// corresponding to phy units of meters:  0.003 - 0.028
-		// 0.3 is 1/2 the total grip width since mimic joint used in urdf
-		gripper_pos_min_m_ = 0.003; // meters
-		// Fix - cleanup, 700 drives the servo to the mechanical limit
-		// of the grabber and causes the servo motor to overheat.
-		// 650 seems like a same max.  What does that make the physical range?
-		//		gripper_pos_min_s_ = 700.0; // servo units
-		gripper_pos_min_s_ = 650.0; // servo units
-		gripper_pos_max_s_ = 200.0;
-		// scale factor: mult scale by phy units in meter to get servo units
-		gripper_pos_m_to_s_factor_ = (gripper_pos_max_s_ - gripper_pos_min_s_) / (0.028 - gripper_pos_min_m_);
+		joint_name_map_.insert(std::make_pair("revolute_1", 1));
+		joint_name_map_.insert(std::make_pair("revolute_2", 2));
+		joint_name_map_.insert(std::make_pair("revolute_3", 3));
+		joint_name_map_.insert(std::make_pair("revolute_4", 4));
+		joint_name_map_.insert(std::make_pair("revolute_5", 5));
+		joint_name_map_.insert(std::make_pair("revolute_6", 6));
+		joint_name_map_.insert(std::make_pair("slider_1", 7));
 
 
 		// range
 		// 																				rad   min	max  mid  default	invert
-		joint_range_limits_["robotarm_1_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_2_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_3_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_4_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_5_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_6_joint"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["robotarm_7_joint"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_1"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_2"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_3"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_4"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_5"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_6"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["slider_1"] = {M_PI, 0, 1000, 500, 500, 1};
 
 		RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Joint limits:");
 
@@ -230,7 +216,7 @@ namespace robotarm
 		double position = 0.0;
 
 		// 그리퍼 연산
-		if (joint_name == "robotarm_7_joint") {
+		if (joint_name == "slider_1") {
 			// 일단 jointValue를 radia 단위인 angle로..!
 			double angle = convertUnitToRad(joint_name, jointValue);
 
@@ -250,7 +236,7 @@ namespace robotarm
 		int jointValue = 0;
 
 		// 그리퍼
-		if (joint_name == "robotarm_7_joint") {
+		if (joint_name == "slider_1") {
 			// 거리(m) -> 각도(rad)
   		// 변수 y 정의
   		double y = position + std::sqrt(B * B - (A - C) * (A - C)) - D;

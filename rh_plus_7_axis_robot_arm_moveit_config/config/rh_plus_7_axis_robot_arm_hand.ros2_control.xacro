@@ -7,7 +7,8 @@
                     <plugin>mock_components/GenericSystem</plugin>
                 </xacro:if>
                 <xacro:if value="${ros2_control_hardware_type == 'real'}">
-                    <plugin>robotarm_hardware/ROBOTArmSystemHardware</plugin>
+                    <plugin>mock_components/GenericSystem</plugin>
+                    <!-- <plugin>robotarm_hardware/ROBOTArmSystemHardware</plugin> -->
                     <param name="example_param_hw_start_duration_sec">0</param>
                     <param name="example_param_hw_stop_duration_sec">3.0</param>
                     <param name="example_param_hw_slowdown">100</param>

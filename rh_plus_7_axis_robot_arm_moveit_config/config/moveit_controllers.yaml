@@ -4,6 +4,7 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 moveit_simple_controller_manager:
   controller_names:
     - arm_controller
+    - hand_controller
 
   arm_controller:
     action_ns: follow_joint_trajectory

@@ -16,6 +16,7 @@
                 </xacro:if>
             </hardware>
 
+            <!--arm-->
             <joint name="revolute_1">
                 <command_interface name="position"/>
                 <state_interface name="position">
@@ -53,6 +54,13 @@
                 </state_interface>
             </joint>
 
+            <!--hand-->
+            <joint name="slider_1">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['slider_1']}</param>
+                </state_interface>
+            </joint>
         </ros2_control>
     </xacro:macro>
 </robot>

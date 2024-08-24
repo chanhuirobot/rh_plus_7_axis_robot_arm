@@ -19,8 +19,8 @@ moveit_simple_controller_manager:
       - revolute_6
 
   hand_controller:
-    type: GripperCommand
-    action_ns: gripper_cmd
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
     default: true
     joints:
       - slider_1

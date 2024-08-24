@@ -8,7 +8,7 @@ controller_manager:
 
 
     hand_controller:
-      type: position_controllers/JointGroupPositionController
+      type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
@@ -31,5 +31,9 @@ arm_controller:
 
 hand_controller:
   ros__parameters:
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
     joints:
       - slider_1

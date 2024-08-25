@@ -119,6 +119,17 @@ namespace robotarm
 			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Failed to read servo %d position", id);
 			return false;
 		}
+
+		// pos에 조작을 가한다 2번 조인트 보정 +7 / 3번 조인트 보정 -7 / 5번 조인트 보정 -3
+		if(id == 2){
+			pos = pos + 7;
+		}
+		else if(id == 3){
+			pos = pos - 7;
+		}
+		else if(id == 5){
+			pos = pos - 3;
+		}
 		return true;
 	}
 

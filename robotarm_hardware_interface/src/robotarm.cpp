@@ -20,6 +20,8 @@
 #define C 0.010048
 #define D 0.001552
 
+const float RAD_RANGE = (240.0/180.0) * M_PI;
+
 // #define ROBOTARM_USB
 
 const int UPDATE_PERIOD_MOVING_MS = 20;
@@ -104,13 +106,13 @@ namespace robotarm
 
 		// range
 		// 																				rad   min	max  mid  default	invert
-		joint_range_limits_["revolute_1"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["revolute_2"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["revolute_3"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["revolute_4"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["revolute_5"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["revolute_6"] = {M_PI, 0, 1000, 500, 500, 1};
-		joint_range_limits_["slider_1"] = {M_PI, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_1"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_2"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_3"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_4"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_5"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["revolute_6"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["slider_1"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 
 		RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Joint limits:");
 

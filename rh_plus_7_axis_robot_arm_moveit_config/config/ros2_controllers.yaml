@@ -27,6 +27,7 @@ arm_controller:
       - revolute_4
       - revolute_5
       - revolute_6
+    allow_nonzero_velocity_at_trajectory_end: false
 
 
 hand_controller:
@@ -37,3 +38,4 @@ hand_controller:
       - position
     joints:
       - slider_1
+    allow_nonzero_velocity_at_trajectory_end: false

@@ -105,14 +105,14 @@ namespace robotarm
 
 
 		// range
-		// 																				rad   min	max  mid  default	invert
+		// 										rad   min  max  mid  default invert
 		joint_range_limits_["revolute_1"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 		joint_range_limits_["revolute_2"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 		joint_range_limits_["revolute_3"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 		joint_range_limits_["revolute_4"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 		joint_range_limits_["revolute_5"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
 		joint_range_limits_["revolute_6"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
-		joint_range_limits_["slider_1"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
+		joint_range_limits_["slider_1"] = {RAD_RANGE, 0, 1000, 500, 486, 1};
 
 		RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Joint limits:");
 

@@ -20,7 +20,7 @@
 #define C 0.010048
 #define D 0.001552
 
-const float RAD_RANGE = (240.0/180.0) * M_PI;
+const float RAD_RANGE = (240.0 / 180.0) * M_PI;
 
 // #define ROBOTARM_USB
 
@@ -47,12 +47,12 @@ const std::string SERIAL_DEV = "/dev/ttyUSB0";
 namespace robotarm
 {
 	robotarm::robotarm() : inited_(false),
-												 run_(false),
-												 gripper_pos_min_m_(0.0),
-												 gripper_pos_min_s_(0.0),
-												 gripper_pos_max_s_(0.0),
-												 gripper_pos_m_to_s_factor_(0.0),
-												 new_cmd_(false)
+						   run_(false),
+						   gripper_pos_min_m_(0.0),
+						   gripper_pos_min_s_(0.0),
+						   gripper_pos_max_s_(0.0),
+						   gripper_pos_m_to_s_factor_(0.0),
+						   new_cmd_(false)
 	{
 	}
 
@@ -103,7 +103,6 @@ namespace robotarm
 		joint_name_map_.insert(std::make_pair("revolute_6", 6));
 		joint_name_map_.insert(std::make_pair("slider_1", 7));
 
-
 		// range
 		// 										rad   min  max  mid  default invert
 		joint_range_limits_["revolute_1"] = {RAD_RANGE, 0, 1000, 500, 500, 1};
@@ -124,9 +123,9 @@ namespace robotarm
 
 			// Print ranges in radians
 			RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Joint: %s,  min,max:  %f, %f",
-									name.c_str(),
-									jointValueToPosition(name, joint_range_limits_[name].min),
-									jointValueToPosition(name, joint_range_limits_[name].max));
+						name.c_str(),
+						jointValueToPosition(name, joint_range_limits_[name].min),
+						jointValueToPosition(name, joint_range_limits_[name].max));
 		}
 
 		// Read the initial positions before starting the thread that will handle that
@@ -151,25 +150,32 @@ namespace robotarm
 	void robotarm::setAllJointPositions(const std::vector<double> &commands, const std::vector<std::string> &joints)
 	{
 		std::lock_guard<std::mutex> guard(mutex_);
-		for (uint i = 0; i < commands.size(); i++)
+		if (std::isfinite(commands[0]) == 1)
 		{
-			const std::string &name = joints[i];
-
-			int joint_pos = positionToJointValue(name, commands[i]);
-			if (joint_pos != last_pos_set_map_[name].pos)
+			for (uint i = 0; i < commands.size(); i++)
 			{
-				RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "New pos cmd %*s %s: %.5f",
-										i * 8, "",
-										name.c_str(),
-										commands[i]);
-				last_pos_set_map_[name] = {joint_pos, true};
-				// Run in open-loop while moving by immediately reporting the movement has completed
-				// since reading the actual position from the servos during motion causes too much
-				// delay and jerky motion as a result.  Once motion stops, the actual joint positions
-				// will updated by the update thread.
-				last_pos_get_map_[name] = {joint_pos, false};
-				new_cmd_ = true;
+				const std::string &name = joints[i];
+
+				int joint_pos = positionToJointValue(name, commands[i]);
+				if (joint_pos != last_pos_set_map_[name].pos)
+				{
+					RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "New pos cmd %*s %s: %.5f",
+								i * 8, "",
+								name.c_str(),
+								commands[i]);
+					last_pos_set_map_[name] = {joint_pos, true};
+					// Run in open-loop while moving by immediately reporting the movement has completed
+					// since reading the actual position from the servos during motion causes too much
+					// delay and jerky motion as a result.  Once motion stops, the actual joint positions
+					// will updated by the update thread.
+					last_pos_get_map_[name] = {joint_pos, false};
+					new_cmd_ = true;
+				}
 			}
+		}
+		else
+		{
+			new_cmd_ = false;
 		}
 	}
 
@@ -181,9 +187,9 @@ namespace robotarm
 		{
 			positions.push_back(jointValueToPosition(joints[i], last_pos_get_map_[joints[i]].pos));
 			RCLCPP_DEBUG(rclcpp::get_logger("ROBOTArmSystemHardware"), "Get cur pos %*s %s: %.5f",
-									 i * 8, "",
-									 joints[i].c_str(),
-									 positions[i]);
+						 i * 8, "",
+						 joints[i].c_str(),
+						 positions[i]);
 		}
 	}
 
@@ -218,14 +224,16 @@ namespace robotarm
 		double position = 0.0;
 
 		// 그리퍼 연산
-		if (joint_name == "slider_1") {
+		if (joint_name == "slider_1")
+		{
 			// 일단 jointValue를 radia 단위인 angle로..!
 			double angle = convertUnitToRad(joint_name, jointValue);
 
 			// 이제 angle을 거리(m)로 바꾸자
 			position = std::sqrt(B * B - (A * std::cos(angle) - C) * (A * std::cos(angle) - C)) + A * std::sin(angle) - std::sqrt(B * B - (A - C) * (A - C)) + D;
 		}
-		else {
+		else
+		{
 			position = convertUnitToRad(joint_name, jointValue);
 		}
 		return position;
@@ -238,20 +246,22 @@ namespace robotarm
 		int jointValue = 0;
 
 		// 그리퍼
-		if (joint_name == "slider_1") {
+		if (joint_name == "slider_1")
+		{
 			// 거리(m) -> 각도(rad)
-  		// 변수 y 정의
-  		double y = position + std::sqrt(B * B - (A - C) * (A - C)) - D;
+			// 변수 y 정의
+			double y = position + std::sqrt(B * B - (A - C) * (A - C)) - D;
 
-  		// y의 연산을 통한 angle 계산
-  		double angle = std::asin((y * y + A * A + C * C - B * B) / (2 * A * std::sqrt(y * y + C * C))) -
-      		      	    std::asin(C / std::sqrt(y * y + C * C));
+			// y의 연산을 통한 angle 계산
+			double angle = std::asin((y * y + A * A + C * C - B * B) / (2 * A * std::sqrt(y * y + C * C))) -
+						   std::asin(C / std::sqrt(y * y + C * C));
 
 			// radian 값으로 받은 angle 값을 jointValue로 변환
 			jointValue = int(convertRadToUnit(joint_name, angle));
 		}
 		// 일반 조인트
-		else {
+		else
+		{
 			jointValue = int(convertRadToUnit(joint_name, position));
 		}
 		return jointValue;
@@ -276,7 +286,7 @@ namespace robotarm
 			}
 			pos_map[name] = {p, true};
 			RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Read servo %s, pos= %d, %f",
-									name.c_str(), p, jointValueToPosition(name, p));
+						name.c_str(), p, jointValueToPosition(name, p));
 		}
 	}
 
@@ -284,12 +294,12 @@ namespace robotarm
 	void robotarm::setJointPosition(std::string joint_name, int position, int time)
 	{
 		RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Set servo %s, pos= %d, time %d",
-								joint_name.c_str(), position, time);
+					joint_name.c_str(), position, time);
 
 		if (!drvr_->setJointPosition(joint_name_map_[joint_name], position, time))
 		{
 			RCLCPP_ERROR(rclcpp::get_logger("ROBOTArmSystemHardware"), "Failed to set joint position for servo %s",
-									 joint_name.c_str());
+						 joint_name.c_str());
 		}
 		return;
 	}
@@ -384,7 +394,7 @@ namespace robotarm
 
 						const std::string &joint = c.first;
 						RCLCPP_INFO(rclcpp::get_logger("ROBOTArmSystemHardware"), "Update, joint %s, pos= %d, delta= %d",
-												joint.c_str(), set_pos, set_pos - pos_map[joint].pos);
+									joint.c_str(), set_pos, set_pos - pos_map[joint].pos);
 						setJointPosition(joint, set_pos, first_set ? FIRST_SET_MOVE_TIME : UPDATE_PERIOD_MOVING_MS);
 					}
 				}

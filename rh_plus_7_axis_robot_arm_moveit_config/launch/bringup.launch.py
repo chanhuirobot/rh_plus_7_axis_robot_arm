@@ -186,7 +186,7 @@ def generate_launch_description():
             parameters=[
                 robot_description,
                 {
-                    "publish_frequency": 50.0,
+                    "publish_frequency": 100.0,
                     "frame_prefix": "",
                     "use_sim_time": use_sim_time,
                 },

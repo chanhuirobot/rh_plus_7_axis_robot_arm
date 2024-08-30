@@ -24,7 +24,7 @@ const float RAD_RANGE = (240.0 / 180.0) * M_PI;
 
 // #define ROBOTARM_USB
 
-const int UPDATE_PERIOD_MOVING_MS = 20;
+const int UPDATE_PERIOD_MOVING_MS = 10; // (1000ms/100Hz) = 10ms
 const int UPDATE_PERIOD_IDLE_MS = 100;
 
 // Use the idle update period if this many 'moving' update

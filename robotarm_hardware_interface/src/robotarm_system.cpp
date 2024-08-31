@@ -40,6 +40,12 @@ namespace robotarm_hardware
   hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
   hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
   hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
+
+  // <urdf ros2_control tag에서 initial_value 가져오기
+  for(int i = 0; i < (int)info_.joints.size(); i++){
+    joint_initial_value[i] = stod(info_.joints[i].state_interfaces[0].initial_value);
+  }
+
   hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
   hw_joint_name_.resize(info_.joints.size(), std::string());
   hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
@@ -134,9 +140,9 @@ hardware_interface::CallbackReturn ROBOTArmSystemHardware::on_activate(const rcl
   }
 
   // set some default values when starting the first time
-  for (uint i = 0; i < hw_states_.size(); i++)
-  {
-    hw_states_[i] = hw_commands_[i] = robotarm.readDefaultPosition(hw_joint_name_[i]);
+  // rad 값 input
+  for (uint i = 0; i < hw_states_.size(); i++) {
+    hw_states_[i] = hw_commands_[i] = joint_initial_value[i];
     hw_commands_last_[i] = std::numeric_limits<double>::max();
   }
 

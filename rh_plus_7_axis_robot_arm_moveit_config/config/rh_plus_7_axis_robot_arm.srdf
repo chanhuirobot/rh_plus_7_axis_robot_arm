@@ -26,12 +26,12 @@
     </group>
 
     <group_state name="rest" group="arm">
-        <joint name="revolute_1" value="0"/>
-        <joint name="revolute_2" value="0"/>
-        <joint name="revolute_3" value="0"/>
-        <joint name="revolute_4" value="0"/>
-        <joint name="revolute_5" value="0"/>
-        <joint name="revolute_6" value="0"/>
+        <joint name="revolute_1" value="0.0"/>
+        <joint name="revolute_2" value="0.0"/>
+        <joint name="revolute_3" value="0.0"/>
+        <joint name="revolute_4" value="0.0"/>
+        <joint name="revolute_5" value="0.0"/>
+        <joint name="revolute_6" value="0.0"/>
     </group_state>
 
     <group_state name="open" group="hand">
@@ -39,7 +39,7 @@
     </group_state>
 
     <group_state name="close" group="hand">
-        <joint name="slider_1" value="0"/>
+        <joint name="slider_1" value="0.00"/>
     </group_state>
 
     <end_effector name="end_effector" parent_link="gripper_base" group="hand" parent_group="arm"/>

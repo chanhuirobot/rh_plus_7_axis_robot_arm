@@ -19,7 +19,6 @@ namespace robotarm
 			int min;			// Range min, servo units
 			int max;			// Range max, servo units
 			int mid;			// Range min, servo units
-			int def;			// Default position, servo units
 			int invert_factor;	// 1 or -1 to invert range
 		};
 
@@ -38,8 +37,6 @@ namespace robotarm
 
 			void setAllJointPositions(const std::vector<double> &commands, const std::vector<std::string> &joints);
 			void getAllJointPositions(std::vector<double> &positions, const std::vector<std::string> &joints);
-
-			double readDefaultPosition(std::string joint_name);
 
 		private:
 			void Process();

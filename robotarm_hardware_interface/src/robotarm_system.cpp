@@ -41,7 +41,7 @@ namespace robotarm_hardware
   hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
   hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
 
-  // <urdf ros2_control tag에서 initial_value 가져오기
+  // urdf <ros2_control> tag에서 initial_value 가져오기
   for(int i = 0; i < (int)info_.joints.size(); i++){
     joint_initial_value[i] = stod(info_.joints[i].state_interfaces[0].initial_value);
   }

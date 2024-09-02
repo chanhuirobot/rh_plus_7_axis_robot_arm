@@ -8,10 +8,9 @@
 #include <cmath>
 
 #include "rclcpp/rclcpp.hpp"
-#include "robotarm_hardware_interface/robotarm.h"
+#include "robotarm_hardware_interface/robotarm.hpp"
 
 #include "robotarm_hardware_interface/robotarm_serial.hpp"
-// #include "robotarm_hardware_interface/robotarm_usb.hpp"
 
 #define MAX_STR 255
 #define INVALID_POS 99999 // Invalid servo value

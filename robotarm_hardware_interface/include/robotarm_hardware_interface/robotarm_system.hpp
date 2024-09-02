@@ -24,8 +24,8 @@
 #include "hardware_interface/system_interface.hpp"
 #include "hardware_interface/types/hardware_interface_return_values.hpp"
 #include "rclcpp/macros.hpp"
-#include "robotarm_hardware_interface/visibility_control.h"
-#include "robotarm.h"
+#include "robotarm_hardware_interface/visibility_control.hpp"
+#include "robotarm.hpp"
 
 namespace robotarm_hardware
 {

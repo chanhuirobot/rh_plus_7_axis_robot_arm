@@ -25,26 +25,8 @@ add_library(
   SHARED
   src/robotarm_system.cpp
   src/robotarm.cpp
-  #src/robotarm_usb.cpp
   src/robotarm_serial.cpp
   src/serial_servo_bus.cpp
-)
-
-# 순수 조인트 테스트... 절대로 로봇에 물려서 작동하면 안됨!!!
-# 모터 7개 단독으로 있을 때만 사용
-add_executable(test_node
-  src/test.cpp
-
-  src/robotarm_system.cpp
-  src/robotarm.cpp
-  src/robotarm_serial.cpp
-  src/serial_servo_bus.cpp
-)
-
-target_include_directories(
-  test_node
-  PRIVATE
-  include
 )
 
 target_include_directories(
@@ -52,7 +34,6 @@ target_include_directories(
   PRIVATE
   include
 )
-
 
 ament_target_dependencies(
   ${PROJECT_NAME}
@@ -62,12 +43,6 @@ ament_target_dependencies(
   hidapi-hidraw
 )
 
-ament_target_dependencies(
-  test_node
-  hardware_interface
-  rclcpp
-)
-
 target_link_libraries(${PROJECT_NAME} PkgConfig::hidapi-hidraw)
 
 pluginlib_export_plugin_description_file(hardware_interface robotarm_hardware.xml)
@@ -75,11 +50,6 @@ pluginlib_export_plugin_description_file(hardware_interface robotarm_hardware.xm
 # INSTALL
 install(
   TARGETS ${PROJECT_NAME}
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-install(
-  TARGETS test_node
   DESTINATION lib/${PROJECT_NAME}
 )
 

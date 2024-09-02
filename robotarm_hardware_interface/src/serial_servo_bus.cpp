@@ -11,7 +11,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "robotarm_hardware_interface/serial_servo_bus.h"
+#include "robotarm_hardware_interface/serial_servo_bus.hpp"
 
 #define GET_LOW_uint8_t(A) (uint8_t)((A))
 // Macro function  get lower 8 bits of A

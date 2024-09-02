@@ -14,7 +14,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "robotarm_hardware_interface/robotarm_serial.hpp"
-#include "robotarm_hardware_interface/serial_servo_bus.h"
+#include "robotarm_hardware_interface/serial_servo_bus.hpp"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // From https://stackoverflow.com/questions/6947413/how-to-open-read-and-write-from-serial-port-in-c

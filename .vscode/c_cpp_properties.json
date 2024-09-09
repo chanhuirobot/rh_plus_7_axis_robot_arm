@@ -6,8 +6,8 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/home/chanhuirobot/robot_ws/src/rh_plus_7_axis_robot_arm/robotarm_hardware_interface/include/**",
-        "/home/chanhuirobot/robot_ws/install/robotarm_hardware_interface/include/**",
+        "${HOME}/robot_ws/src/rh_plus_7_axis_robot_arm/robotarm_hardware_interface/include/**",
+        "${HOME}/robot_ws/install/robotarm_hardware_interface/include/**",
         "/opt/ros/humble/include/**",
         "/usr/include/**"
       ],

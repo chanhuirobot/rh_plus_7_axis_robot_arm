@@ -15,7 +15,6 @@ from launch.substitutions import (
     FindExecutable,
     LaunchConfiguration,
     PathJoinSubstitution,
-    PythonExpression
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
@@ -27,7 +26,6 @@ def generate_launch_description():
     declared_arguments = generate_declared_arguments()
 
     # Get substitution for all arguments
-    description_package = LaunchConfiguration("description_package")
     description_filepath = LaunchConfiguration("description_filepath")
     moveit_config_package = "rh_plus_7_axis_robot_arm_moveit_config"
     name = LaunchConfiguration("name")
@@ -43,7 +41,6 @@ def generate_launch_description():
     enable_rviz = LaunchConfiguration("enable_rviz")
     rviz_config = LaunchConfiguration("rviz_config")
     use_sim_time = LaunchConfiguration("use_sim_time")
-    log_level = LaunchConfiguration("log_level")
 
     # URDF
     _robot_description_xml = Command(

@@ -5,7 +5,6 @@ from os import path
 from typing import List
 
 import yaml
-import launch_ros.descriptions
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument

@@ -25,6 +25,10 @@
   <color rgba="0.361 0.522 0.827 1.000"/>
 </material>
 
+<material name="pink">
+  <color rgba="1.000 0.412 0.706 1.000"/>
+</material>
+
 <material name="purple">
   <color rgba="0.690 0.506 0.816 1.000"/>
 </material>

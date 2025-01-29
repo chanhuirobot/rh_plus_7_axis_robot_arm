@@ -8,7 +8,7 @@
         <link name="link3"/>
         <link name="link4"/>
         <link name="link5"/>
-        <link name="gripper_base"/>
+        <link name="link6"/>
         <joint name="revolute_1"/>
         <joint name="revolute_2"/>
         <joint name="revolute_3"/>
@@ -19,6 +19,7 @@
     </group>
 
     <group name="hand">
+        <link name="gripper_base"/>
         <link name="gripper_hand_left"/>
         <link name="gripper_hand_right"/>
         <joint name="slider_1"/>
@@ -52,18 +53,23 @@
     <disable_collisions link1="gripper_base" link2="gripper_hand_right" reason="Adjacent"/>
     <disable_collisions link1="gripper_base" link2="link3" reason="Never"/>
     <disable_collisions link1="gripper_base" link2="link4" reason="Never"/>
-    <disable_collisions link1="gripper_base" link2="link5" reason="Adjacent"/>
+    <disable_collisions link1="gripper_base" link2="link5" reason="Never"/>
+    <disable_collisions link1="gripper_base" link2="link6" reason="Adjacent"/>
     <disable_collisions link1="gripper_hand_left" link2="gripper_hand_right" reason="Default"/>
     <disable_collisions link1="gripper_hand_left" link2="link3" reason="Never"/>
     <disable_collisions link1="gripper_hand_left" link2="link4" reason="Never"/>
     <disable_collisions link1="gripper_hand_left" link2="link5" reason="Never"/>
+    <disable_collisions link1="gripper_hand_left" link2="link6" reason="Never"/>
     <disable_collisions link1="gripper_hand_right" link2="link3" reason="Never"/>
     <disable_collisions link1="gripper_hand_right" link2="link4" reason="Never"/>
     <disable_collisions link1="gripper_hand_right" link2="link5" reason="Never"/>
+    <disable_collisions link1="gripper_hand_right" link2="link6" reason="Never"/>
     <disable_collisions link1="link1" link2="link2" reason="Adjacent"/>
     <disable_collisions link1="link2" link2="link3" reason="Adjacent"/>
     <disable_collisions link1="link2" link2="link4" reason="Never"/>
     <disable_collisions link1="link3" link2="link4" reason="Adjacent"/>
     <disable_collisions link1="link3" link2="link5" reason="Never"/>
     <disable_collisions link1="link4" link2="link5" reason="Adjacent"/>
+    <disable_collisions link1="link4" link2="link6" reason="Never"/>
+    <disable_collisions link1="link5" link2="link6" reason="Adjacent"/>
 </robot>

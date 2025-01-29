@@ -54,11 +54,12 @@ void MTCTaskNode::setupPlanningScene()
   object.header.frame_id = "world";
   object.primitives.resize(1);
   object.primitives[0].type = shape_msgs::msg::SolidPrimitive::CYLINDER;
-  object.primitives[0].dimensions = { 0.1, 0.02 };
+  object.primitives[0].dimensions = { 0.05, 0.01 };
 
   geometry_msgs::msg::Pose pose;
-  pose.position.x = 0.5;
-  pose.position.y = -0.25;
+  pose.position.x = 0.23;
+  pose.position.y = 0.0;
+  pose.position.z = 0.025 + 0.06;
   pose.orientation.w = 1.0;
   object.pose = pose;
 
@@ -103,13 +104,13 @@ mtc::Task MTCTaskNode::createTask()
   task.stages()->setName("demo task");
   task.loadRobotModel(node_);
 
-  const auto& arm_group_name = "panda_arm";
+  const auto& arm_group_name = "arm";
   const auto& hand_group_name = "hand";
-  const auto& hand_frame = "panda_hand";
+  const auto& hand_frame = "gripper_base";
 
   // Set task properties
   task.setProperty("group", arm_group_name);
-  task.setProperty("eef", hand_group_name);
+  task.setProperty("eef", "end_effector");
   task.setProperty("ik_frame", hand_frame);
 
   mtc::Stage* current_state_ptr = nullptr;  // Forward current_state on to grasp pose generator
@@ -160,7 +161,7 @@ mtc::Task MTCTaskNode::createTask()
       stage->properties().set("marker_ns", "approach_object");
       stage->properties().set("link", hand_frame);
       stage->properties().configureInitFrom(mtc::Stage::PARENT, { "group" });
-      stage->setMinMaxDistance(0.1, 0.15);
+      stage->setMinMaxDistance(0.2, 0.02);
 
       // Set hand forward direction
       geometry_msgs::msg::Vector3Stamped vec;

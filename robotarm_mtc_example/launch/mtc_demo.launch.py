@@ -4,16 +4,25 @@ from launch.actions import ExecuteProcess
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
+    ros2_control_hardware_type_launch_arg = DeclareLaunchArgument(
+        "ros2_control_hardware_type",
+        default_value="fake",
+        description="ros2_control_hardware_type ('fake' or 'real')",
+    )
+    ros2_control_hardware_type = LaunchConfiguration("ros2_control_hardware_type")
+
     # planning_context
     moveit_config = (
         MoveItConfigsBuilder("rh_plus_7_axis_robot_arm")
-        .robot_description(file_path="config/rh_plus_7_axis_robot_arm.urdf.xacro")
+        .robot_description(file_path="config/rh_plus_7_axis_robot_arm.urdf.xacro", mappings={"ros2_control_hardware_type": ros2_control_hardware_type})
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_pipelines(
-            pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]
+            pipelines=["ompl"]
         )
         .to_moveit_configs()
     )
@@ -82,7 +91,7 @@ def generate_launch_description():
         executable="ros2_control_node",
         parameters=[ros2_controllers_path],
         remappings=[
-            ("/controller_manager/robot_description", "/robot_description"),
+                ("~/robot_description", "/robot_description"),
         ],
         output="both",
     )
@@ -104,6 +113,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            ros2_control_hardware_type_launch_arg,
             rviz_node,
             static_tf,
             robot_state_publisher,

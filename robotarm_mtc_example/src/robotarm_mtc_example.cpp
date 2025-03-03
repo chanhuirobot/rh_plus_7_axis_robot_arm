@@ -120,8 +120,8 @@ mtc::Task MTCTaskNode::createTask()
 
   auto sampling_planner = std::make_shared<mtc::solvers::PipelinePlanner>(node_);
   auto interpolation_planner = std::make_shared<mtc::solvers::JointInterpolationPlanner>();
-
   auto cartesian_planner = std::make_shared<mtc::solvers::CartesianPath>();
+
   cartesian_planner->setMaxVelocityScalingFactor(1.0);
   cartesian_planner->setMaxAccelerationScalingFactor(1.0);
   cartesian_planner->setStepSize(.01);

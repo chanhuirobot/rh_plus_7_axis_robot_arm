@@ -13,7 +13,11 @@ find_package(rclcpp REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
+# 실행할 executable들 추가
 add_executable(robotarm_mtc_example src/robotarm_mtc_example.cpp)
+
+
+
 ament_target_dependencies(robotarm_mtc_example moveit_task_constructor_core rclcpp)
 target_include_directories(robotarm_mtc_example PUBLIC
 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

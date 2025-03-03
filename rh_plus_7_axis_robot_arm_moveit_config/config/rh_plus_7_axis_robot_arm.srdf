@@ -26,6 +26,11 @@
         <joint name="slider_2"/>
     </group>
 
+    <group name="arm_hand">
+        <group name="arm"/>
+        <group name="hand"/>
+    </group>
+
     <group_state name="rest" group="arm">
         <joint name="revolute_1" value="0.0"/>
         <joint name="revolute_2" value="0.0"/>
